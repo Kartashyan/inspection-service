@@ -4,13 +4,14 @@ import { InspectionDate } from "./inspection-date.value-object";
 import { DomainError } from "../../core-tools/domain-error";
 import { AggregateRoot } from "../../core-tools/aggregate-root";
 
+type ScheduleItem = {
+    date: InspectionDate;
+    inspectionId: UID;
+    inspectionLevel: SubscriptionLevel;
+}
 type InspectorProps = {
     id: UID;
-    schedule: {
-        date: InspectionDate;
-        inspectionId: UID;
-        inspectionLevel: SubscriptionLevel;
-    }[];
+    schedule: ScheduleItem[];
     subscriptionLevelsAllowed: SubscriptionLevel[];
 };
 
@@ -30,6 +31,24 @@ export class Inspector extends AggregateRoot<InspectorProps> {
     }
 
     static create(props: InspectorProps): Inspector {
+        if (!this.isValidProps(props)) {
+            throw new DomainError("Inspector properties are violating business rules"); // this error message is not very helpful, we need to be more specific here
+        }
         return new Inspector(props);
+    }
+
+    private static isValidProps(props: InspectorProps): boolean {
+        if (!this.hasNoDuplicateDates(props.schedule)) {
+            return false;
+        }
+        if (props.schedule.some((inspection) => !props.subscriptionLevelsAllowed.includes(inspection.inspectionLevel))) {
+            return false;
+        }
+        return true;
+    }
+
+    private static hasNoDuplicateDates(items: ScheduleItem[]): boolean {
+        const uniqueDates = new Set(items.map(item => item.date));
+        return uniqueDates.size === items.length;
     }
 }

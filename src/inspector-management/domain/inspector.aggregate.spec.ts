@@ -1,52 +1,66 @@
-import { Inspector } from './inspector.aggregate';
-import { InspectionDate } from './inspection-date.value-object';
-import { SubscriptionLevel } from './subscription-level';
-import { DomainError } from '../../core-tools/domain-error';
-import { UID } from '../../core-tools/id';
+import { Inspector } from "./inspector.aggregate";
+import { UID } from "../../core-tools/id";
+import { SubscriptionLevel } from "./subscription-level";
+import { InspectionDate } from "./inspection-date.value-object";
+import { DomainError } from "../../core-tools/domain-error";
 
-describe('Inspector', () => {
+describe("Inspector", () => {
   let inspector: Inspector;
+  const inspectorId= new UID("inspectorId");
+  const subscriptionLevelsAllowed: SubscriptionLevel[] = [SubscriptionLevel.Essential, SubscriptionLevel.Advanced];
+  const scheduleItem1 = {
+    date: new InspectionDate(new Date("2022-01-01")),
+    inspectionId: new UID("inspectionId1"),
+    inspectionLevel: SubscriptionLevel.Essential,
+  };
+  const scheduleItem2 = {
+    date: new InspectionDate(new Date("2022-01-02")),
+    inspectionId: new UID("inspectionId2"),
+    inspectionLevel: SubscriptionLevel.Advanced,
+  };
 
   beforeEach(() => {
-    const props = {
-      id: new UID('inspectorId'),
+    inspector = Inspector.create({
+      id: inspectorId,
       schedule: [],
-      subscriptionLevelsAllowed: [SubscriptionLevel.Essential, SubscriptionLevel.Advanced],
-    };
-    inspector = Inspector.create(props);
+      subscriptionLevelsAllowed,
+    });
   });
 
-  describe('assignInspection', () => {
-    it('should assign an inspection to the inspector', () => {
-      const date = new InspectionDate(new Date('2022-01-01'));
-      const inspectionId = new UID('inspectionId');
-      const inspectionLevel = SubscriptionLevel.Essential;
+  describe("assignInspection", () => {
+    it("should assign an inspection to the schedule", () => {
+      inspector.assignInspection(
+        scheduleItem1.date,
+        scheduleItem1.inspectionId,
+        scheduleItem1.inspectionLevel
+      );
 
-      inspector.assignInspection(date, inspectionId, inspectionLevel);
-
-      expect(inspector.props.schedule).toEqual([
-        { date, inspectionId, inspectionLevel },
-      ]);
+      expect(inspector.props.schedule).toEqual([scheduleItem1]);
     });
 
-    it('should throw an error if inspector is not allowed to perform the inspection level', () => {
-      const date = new InspectionDate(new Date('2022-01-01'));
-      const inspectionId = new UID('inspectionId');
-      const inspectionLevel = SubscriptionLevel.Premium;
-
+    it("should throw an error if the inspector is not allowed to perform the inspection level", () => {
       expect(() =>
-        inspector.assignInspection(date, inspectionId, inspectionLevel)
+        inspector.assignInspection(
+          scheduleItem1.date,
+          scheduleItem1.inspectionId,
+          SubscriptionLevel.Premium
+        )
       ).toThrow(DomainError);
     });
 
-    it('should throw an error if inspector is already scheduled for the date', () => {
-      const date = new InspectionDate(new Date('2022-01-01'));
-      const inspectionId = new UID('inspectionId');
-      const inspectionLevel = SubscriptionLevel.Essential;
+    it("should throw an error if the inspector is already scheduled for the date", () => {
+      inspector.assignInspection(
+        scheduleItem1.date,
+        scheduleItem1.inspectionId,
+        scheduleItem1.inspectionLevel
+      );
 
-      inspector.assignInspection(date, inspectionId, inspectionLevel);
       expect(() =>
-        inspector.assignInspection(date, inspectionId, inspectionLevel)
+        inspector.assignInspection(
+          scheduleItem1.date,
+          scheduleItem2.inspectionId,
+          scheduleItem2.inspectionLevel
+        )
       ).toThrow(DomainError);
     });
   });
