@@ -1,4 +1,4 @@
-import { ValueObject } from "src/core-tools/value-object";
+import { ValueObject } from "../../core-tools/value-object";
 
 interface DurationProps {
     days: number;

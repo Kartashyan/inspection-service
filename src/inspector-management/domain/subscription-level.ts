@@ -1,8 +1,8 @@
-import { ValueObject } from "src/core-tools/value-object";
+import { ValueObject } from "../../core-tools/value-object";
 import { Duration } from "./duration.value-object";
 
 enum SubscriptionType {
-    Essentials = 'Essential',
+    Essential = 'Essential',
     Advanced = 'Advanced',
     Premium = 'Premium'
 }
@@ -15,6 +15,10 @@ interface SubscriptionLevelProps {
 
 export class SubscriptionLevel extends ValueObject<SubscriptionLevelProps> {
 
+    static Essential = new SubscriptionLevel(SubscriptionType.Essential);
+    static Advanced = new SubscriptionLevel(SubscriptionType.Advanced);
+    static Premium = new SubscriptionLevel(SubscriptionType.Premium);
+
     constructor(subscriptionType: SubscriptionType) {
         super({
             type: SubscriptionType[subscriptionType],
@@ -24,7 +28,7 @@ export class SubscriptionLevel extends ValueObject<SubscriptionLevelProps> {
     }
     static getMinDeliveryTime(subscriptionType: SubscriptionType): Duration {
         switch (subscriptionType) {
-            case SubscriptionType.Essentials:
+            case SubscriptionType.Essential:
                 return new Duration(28);
             case SubscriptionType.Advanced:
                 return new Duration(21);
@@ -35,7 +39,7 @@ export class SubscriptionLevel extends ValueObject<SubscriptionLevelProps> {
 
     static getMaxDeliveryTime(subscriptionType: SubscriptionType): Duration {
         switch (subscriptionType) {
-            case SubscriptionType.Essentials:
+            case SubscriptionType.Essential:
                 return new Duration(120);
             case SubscriptionType.Advanced:
                 return new Duration(60);
