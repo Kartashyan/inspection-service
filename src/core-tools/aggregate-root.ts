@@ -14,7 +14,7 @@ export class AggregateRoot<T extends { id: UID }> extends Entity<T> {
         this._domainEvents.push(event);
     }
 
-    get domainEvents(): DomainEvent<AggregateRoot<T>>[] {
+    getDomainEvents(): DomainEvent<AggregateRoot<T>>[] {
         return this._domainEvents;
     }
 
