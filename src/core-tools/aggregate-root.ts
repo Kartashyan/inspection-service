@@ -1,7 +1,11 @@
 import { DomainEvent } from "./domain-event";
 import { Entity } from "./entity";
 import { UID } from "./id";
-import { LocalEventManager } from "./local-event-manager";
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
+interface EventEmitter<A> {
+    emitAsync(name: string, event: DomainEvent<A>): Promise<any[]>;
+}
 
 export class AggregateRoot<T extends { id: UID }> extends Entity<T> {
     protected _domainEvents: DomainEvent<this>[];
@@ -18,10 +22,18 @@ export class AggregateRoot<T extends { id: UID }> extends Entity<T> {
         return this._domainEvents;
     }
 
-    dispatchDomainEvents(emitter: LocalEventManager = LocalEventManager.getInstance()): void {
-        this._domainEvents.forEach((event) => {
-            emitter.dispatch(event.name, event);
-        });
+    public async publishEvents(
+        eventEmitter: EventEmitter<AggregateRoot<T>>,
+    ): Promise<void> {
+        await Promise.all(
+            this.getDomainEvents().map(async (event) => {
+                return eventEmitter.emitAsync(event.name, event);
+            }),
+        );
+        this.clearEvents();
+    }
+
+    public clearEvents(): void {
         this._domainEvents = [];
     }
 }
