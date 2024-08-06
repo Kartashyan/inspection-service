@@ -1,11 +1,14 @@
 import { DomainEvent } from "src/core-tools/domain-event";
 import { Inspection } from "../inspection.aggregate";
 
-export class InspectionCreatedEvent implements DomainEvent<Inspection> {
+export class InspectionCreatedEvent extends DomainEvent {
     readonly occuredAt: Date;
     readonly name = "inspection-created";
 
-    constructor(public readonly aggregate: Inspection) {
+    constructor(readonly aggregate: Inspection) {
+        super({
+            aggregateId: aggregate.id.value,
+        });
         this.occuredAt = new Date();
     }
 
