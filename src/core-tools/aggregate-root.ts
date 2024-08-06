@@ -4,21 +4,21 @@ import { UID } from "./id";
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 interface EventEmitter<A> {
-    emitAsync(name: string, event: DomainEvent<A>): Promise<any[]>;
+    emitAsync(name: string, event: DomainEvent): Promise<any[]>;
 }
 
 export class AggregateRoot<T extends { id: UID }> extends Entity<T> {
-    protected _domainEvents: DomainEvent<this>[];
+    protected _domainEvents: DomainEvent[];
     constructor(_props: T) {
         super(_props);
         this._domainEvents = [];
     }
 
-    public addDomainEvent(event: DomainEvent<this>): void {
+    public addDomainEvent(event: DomainEvent): void {
         this._domainEvents.push(event);
     }
 
-    getDomainEvents(): DomainEvent<AggregateRoot<T>>[] {
+    getDomainEvents(): DomainEvent[] {
         return this._domainEvents;
     }
 
