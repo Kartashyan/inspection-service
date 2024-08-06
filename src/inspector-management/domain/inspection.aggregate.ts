@@ -18,6 +18,14 @@ export class Inspection extends AggregateRoot<InspectionProps<boolean>> {
         super(props);
     }
 
+    getSubscriptionLevel(): SubscriptionLevel {
+        return this.props.subscriptionLevel;
+    }
+
+    getRequestedDate(): InspectionDate {
+        return this.props.requestedDate;
+    }
+
     static create(props: InspectionProps<boolean>): Inspection {
         const inspection = new Inspection(props);
         if(props.id.isNew) {
