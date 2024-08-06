@@ -2,7 +2,7 @@ import { UID } from "src/core-tools/id";
 import { InspectionDate } from "../domain/inspection-date.value-object";
 import { Inspection, InspectionProps } from "../domain/inspection.aggregate";
 import { ClientsRepositoryPort } from "../domain/ports/client-repository.port";
-import { InspectionsRepositoryPort } from "../domain/ports/inspections-repository.port";
+import { InspectionsRepositoryPort } from "../domain/ports/inspection-repository.port";
 import { InspectionRequestDto } from "./inspection.dto";
 
 export class HandleNewInspectionRequestUseCase {
