@@ -3,6 +3,7 @@ import { SubscriptionLevel } from "./subscription-level";
 import { InspectionDate } from "./inspection-date.value-object";
 import { DomainError } from "../../core-tools/domain-error";
 import { AggregateRoot } from "../../core-tools/aggregate-root";
+import { InspectorBookedEvent } from "./domain-events/inspector-booked.event";
 
 type ScheduleItem = {
     date: InspectionDate;
@@ -28,6 +29,12 @@ export class Inspector extends AggregateRoot<InspectorProps> {
             throw new DomainError("Inspector is already scheduled for this date");
         }
         this.props.schedule.push({ date, inspectionId, inspectionLevel });
+        
+        this.addDomainEvent(new InspectorBookedEvent(this));
+    }
+
+    getSchedule(): ScheduleItem[] {
+        return this.props.schedule;
     }
 
     static create(props: InspectorProps): Inspector {
