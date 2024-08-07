@@ -1,7 +1,7 @@
 import { Inspection } from "../inspection.aggregate";
 import { SubscriptionLevel } from "../subscription-level";
 
-export interface InspectionsRepositoryPort {
+export interface InspectionRepositoryPort {
     save(inspection: Inspection): Promise<void>;
     findById(inspectionId: string): Promise<Inspection>;
     // findByInspectorId(inspectorId: string): Promise<Inspection[]>;
