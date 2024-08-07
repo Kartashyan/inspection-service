@@ -26,6 +26,15 @@ export class Inspection extends AggregateRoot<InspectionProps<boolean>> {
         return this.props.requestedDate;
     }
 
+    scheduleInspection(inspectorId: UID, inspectionDate: InspectionDate) {
+        if(this.props.isScheduled) {
+            throw new Error("Inspection is already scheduled");
+        }
+        this.props.inspectorId = inspectorId;
+        this.props.inspectionDate = inspectionDate;
+        this.props.isScheduled = true;
+    }
+
     static create(props: InspectionProps<boolean>): Inspection {
         const inspection = new Inspection(props);
         if(props.id.isNew) {
