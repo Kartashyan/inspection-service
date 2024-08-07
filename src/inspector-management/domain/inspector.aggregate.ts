@@ -28,9 +28,10 @@ export class Inspector extends AggregateRoot<InspectorProps> {
         if (this.props.schedule.some((inspection) => inspection.date.equals(date))) {
             throw new DomainError("Inspector is already scheduled for this date");
         }
-        this.props.schedule.push({ date, inspectionId, inspectionLevel });
+        const inspectionDto = { date, inspectionId, inspectionLevel };
+        this.props.schedule.push(inspectionDto);
         
-        this.addDomainEvent(new InspectorBookedEvent(this));
+        this.addDomainEvent(new InspectorBookedEvent(this.id, inspectionDto));
     }
 
     getSchedule(): ScheduleItem[] {
