@@ -4,14 +4,16 @@ import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.
 import { EventEmitter2 } from "@nestjs/event-emitter";
 
 export class InspectionInMemoryTestRepositoryAdapter implements InspectionRepositoryPort {
-    private inspections: Inspection[] = [];
+    private inspections: Map<string, Inspection> = new Map();
 
     async save(inspection: Inspection): Promise<void> {
-        this.inspections.push(inspection);
+        if(!this.inspections.has(inspection.id.value)) {
+            this.inspections.set(inspection.id.value, inspection);
+        }
         inspection.publishEvents(new EventEmitter2());
     }
 
-    async findById(inspectionId: string): Promise<Inspection> {
-        return this.inspections.find(inspection => inspection.id.equals(new UID(inspectionId)));
+    async findById(inspectionId: UID): Promise<Inspection> {
+        return this.inspections.get(inspectionId.value);
     }
 }
