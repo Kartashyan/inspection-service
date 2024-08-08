@@ -1,9 +1,9 @@
+import { UID } from "src/core-tools/id";
 import { Inspection } from "../inspection.aggregate";
-import { SubscriptionLevel } from "../subscription-level";
 
 export interface InspectionRepositoryPort {
     save(inspection: Inspection): Promise<void>;
-    findById(inspectionId: string): Promise<Inspection>;
+    findById(inspectionId: UID): Promise<Inspection>;
     // findByInspectorId(inspectorId: string): Promise<Inspection[]>;
     // findByClientId(clientId: string): Promise<Inspection[]>;
     // findBySiteId(siteId: string): Promise<Inspection[]>;
