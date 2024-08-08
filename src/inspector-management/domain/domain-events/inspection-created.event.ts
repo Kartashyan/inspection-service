@@ -7,7 +7,7 @@ export class InspectionCreatedEvent extends DomainEvent {
 
     constructor(readonly aggregate: Inspection) {
         super({
-            aggregateId: aggregate.id.value,
+            aggregateId: aggregate.id,
         });
         this.occuredAt = new Date();
     }
