@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { InspectionManagementService } from './inspection-management.service';
+import { CreateNewInspectionDto, InspectionManagementService } from './inspection-management.service';
 
 describe('InspectionManagementService', () => {
   let service: InspectionManagementService;
@@ -14,5 +14,19 @@ describe('InspectionManagementService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  describe('registerNewInspection', () => {
+    it('should be defined', () => {
+      expect(service.registerNewInspection).toBeDefined();
+    });
+
+    it('should throw and error if new inspection dto is invalid', () => {
+      const dto = {
+        clientId: '',
+        siteId: '',
+      } as CreateNewInspectionDto;
+      expect(() => service.registerNewInspection(dto)).toThrow();
+    });
   });
 });
