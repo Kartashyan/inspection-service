@@ -4,6 +4,7 @@ import { InspectionManagementController } from './inspection-management.controll
 import { InspectionInMemoryTestRepositoryAdapter } from './inspection-repository.adapter';
 import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
 import { ClientInMemoryTestRepositoryAdapter } from './client-repository.adapter';
+import { CqrsModule } from '@nestjs/cqrs';
 
 const repositories: Provider[] = [
   {
@@ -15,10 +16,15 @@ const repositories: Provider[] = [
     useClass: ClientInMemoryTestRepositoryAdapter
   },
 ];
+
+const commandHandlers: Provider[] = [
+  RegisterInspectionCommandHandler
+];
 @Module({
+  imports: [CqrsModule],
   providers: [
     ...repositories,
-    RegisterInspectionCommandHandler
+    ...commandHandlers
   ],
   controllers: [InspectionManagementController]
 })
