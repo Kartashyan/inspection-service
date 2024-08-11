@@ -3,7 +3,7 @@ import { InspectionDate } from "../domain/inspection-date.value-object";
 import { Inspection, InspectionProps } from "../domain/inspection.aggregate";
 import { ClientsRepositoryPort } from "../domain/ports/client-repository.port";
 import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.port";
-import { registerInspectionUsecase } from "./register-inspection.use-case";
+import { registerInspectionUsecase } from "./register-inspection.handler.use-case";
 import { SubscriptionLevel } from "../domain/subscription-level";
 import { UID } from "src/core-tools/id";
 

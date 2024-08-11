@@ -1,5 +1,5 @@
 import { RegisterInspectionCommandHandler, CreateNewInspectionDto } from './register-inspection.command-handler.service';
-import * as registerInspectionUsecase from './applicaation/register-inspection.use-case';
+import * as registerInspectionUsecase from './applicaation/register-inspection.handler.use-case';
 import { ClientsRepositoryPort } from './domain/ports/client-repository.port';
 import { InspectionRepositoryPort } from './domain/ports/inspection-repository.port';
 import { SubscriptionLevel } from './domain/subscription-level';
