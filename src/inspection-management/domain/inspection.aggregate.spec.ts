@@ -47,7 +47,7 @@ describe("Inspection", () => {
       const domainEvents = inspection.getDomainEvents();
       expect(domainEvents).toHaveLength(1);
       expect(domainEvents[0]).toBeInstanceOf(InspectionCreatedEvent);
-      expect(domainEvents[0].aggregate).toEqual(inspection);
+      expect(domainEvents[0].aggregateId).toEqual(inspection.id);
     });
   });
 });
