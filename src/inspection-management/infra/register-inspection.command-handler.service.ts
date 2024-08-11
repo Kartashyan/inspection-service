@@ -1,9 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler } from '@nestjs/cqrs';
-import { RegisterInspectionCommand } from './applicaation/register-inspection.command';
-import { registerInspectionUsecase } from './applicaation/register-inspection.handler.use-case';
-import { ClientsRepositoryPort } from './domain/ports/client-repository.port';
-import { InspectionRepositoryPort } from './domain/ports/inspection-repository.port';
+import { RegisterInspectionCommand } from '../applicaation/register-inspection.command';
+import { registerInspectionUsecase } from '../applicaation/register-inspection.handler.use-case';
+import { ClientsRepositoryPort } from '../domain/ports/client-repository.port';
+import { InspectionRepositoryPort } from '../domain/ports/inspection-repository.port';
 import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
 
 export type CreateNewInspectionDto = {
