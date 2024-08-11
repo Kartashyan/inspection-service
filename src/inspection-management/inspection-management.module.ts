@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { InspectionManagementService } from './inspection-management.service';
+import { RegisterInspectionCommandHandler } from './register-inspection.command-handler.service';
 import { InspectionManagementController } from './inspection-management.controller';
 
 @Module({
-  providers: [InspectionManagementService],
+  providers: [RegisterInspectionCommandHandler],
   controllers: [InspectionManagementController]
 })
 export class InspectionManagementModule {}

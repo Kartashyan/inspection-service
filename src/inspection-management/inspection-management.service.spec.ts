@@ -1,14 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateNewInspectionDto, InspectionManagementService } from './inspection-management.service';
-import { InspectionRepositoryPort } from './domain/ports/inspection-repository.port';
-import { InspectionInMemoryTestRepositoryAdapter } from './infra/inspection-repository.adapter';
-import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
-import { find } from 'rxjs';
 import { ClientsRepositoryPort } from './domain/ports/client-repository.port';
+import { InspectionRepositoryPort } from './domain/ports/inspection-repository.port';
 import { SubscriptionLevel } from './domain/subscription-level';
+import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
+import { CreateNewInspectionDto, RegisterInspectionCommandHandler } from './register-inspection.command-handler.service';
 
 describe('InspectionManagementService', () => {
-  let service: InspectionManagementService;
+  let service: RegisterInspectionCommandHandler;
   let inspectionRepository: InspectionRepositoryPort;
   let clientRepository: ClientsRepositoryPort;
   let findClientByIdSpy = jest.fn();
@@ -17,7 +15,7 @@ describe('InspectionManagementService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        InspectionManagementService,
+        RegisterInspectionCommandHandler,
         {
           provide: INSPECTION_REPOSITORY,
           useValue: {
@@ -35,7 +33,7 @@ describe('InspectionManagementService', () => {
       ],
     }).compile();
 
-    service = module.get<InspectionManagementService>(InspectionManagementService);
+    service = module.get<RegisterInspectionCommandHandler>(RegisterInspectionCommandHandler);
     inspectionRepository = module.get<InspectionRepositoryPort>(INSPECTION_REPOSITORY);
     clientRepository = module.get<ClientsRepositoryPort>(CLIENT_REPOSITORY);
   });
@@ -46,7 +44,7 @@ describe('InspectionManagementService', () => {
 
   describe('registerNewInspection', () => {
     it('should be defined', () => {
-      expect(service.registerNewInspection).toBeDefined();
+      expect(service.execute).toBeDefined();
     });
     it('should call findById method of client repository', async () => {
       const dto: CreateNewInspectionDto = {
@@ -56,7 +54,7 @@ describe('InspectionManagementService', () => {
       findClientByIdSpy.mockResolvedValue({
         getSubscriptionLevel: jest.fn().mockReturnValue(SubscriptionLevel.Essential),
       });
-      await service.registerNewInspection(dto);
+      await service.execute(dto);
       expect(clientRepository.findById).toHaveBeenCalled();
     });
     it('should call save method of inspection repository', async () => {
@@ -64,7 +62,7 @@ describe('InspectionManagementService', () => {
         clientId: 'clientId',
         siteId: 'siteId',
       } as CreateNewInspectionDto;
-      await service.registerNewInspection(dto);
+      await service.execute(dto);
       expect(inspectionRepository.save).toHaveBeenCalled();
     });
   });
