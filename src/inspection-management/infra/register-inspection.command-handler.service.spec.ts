@@ -21,7 +21,7 @@ describe('RegisterInspectionCommandHandler', () => {
       save: jest.fn(),
     };
     handler = new RegisterInspectionCommandHandler(inspectionRepository, clientRepository);
-    registerInspectionUsecaseSpy = jest.spyOn(registerInspectionUsecase, 'registerInspectionUsecase');
+    registerInspectionUsecaseSpy = jest.spyOn(registerInspectionUsecase, 'registerInspectionUseCase');
   });
 
   afterEach(() => {
