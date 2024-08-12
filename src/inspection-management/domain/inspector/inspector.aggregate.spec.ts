@@ -1,8 +1,8 @@
 import { Inspector } from "./inspector.aggregate";
-import { UID } from "../../core-tools/id";
-import { SubscriptionLevel } from "./subscription-level";
-import { InspectionDate } from "./inspection-date.value-object";
-import { DomainError } from "../../core-tools/domain-error";
+import { UID } from "../../../core-tools/id";
+import { SubscriptionLevel } from "../subscription-level";
+import { InspectionDate } from "../inspection-date.value-object";
+import { DomainError } from "../../../core-tools/domain-error";
 
 describe("Inspector", () => {
   let inspector: Inspector;

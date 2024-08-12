@@ -1,5 +1,5 @@
 import { DomainEvent } from "src/core-tools/domain-event";
-import { Inspector } from "../inspector.aggregate";
+import { Inspector } from "../inspector/inspector.aggregate";
 import { AggregateRoot } from "src/core-tools/aggregate-root";
 import { inspect } from "util";
 import { InspectionDate } from "../inspection-date.value-object";

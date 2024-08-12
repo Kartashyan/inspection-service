@@ -1,8 +1,8 @@
 import { AggregateRoot } from "src/core-tools/aggregate-root";
 import { UID } from "src/core-tools/id";
-import { SubscriptionLevel } from "./subscription-level";
-import { InspectionDate } from "./inspection-date.value-object";
-import { InspectionCreatedEvent } from "./domain-events/inspection-created.event";
+import { SubscriptionLevel } from "../subscription-level";
+import { InspectionDate } from "../inspection-date.value-object";
+import { InspectionCreatedEvent } from "../domain-events/inspection-created.event";
 
 export type InspectionProps<Scheduled extends boolean> = {
     id: UID;

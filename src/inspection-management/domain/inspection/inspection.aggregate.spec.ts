@@ -1,8 +1,8 @@
 import { Inspection } from "./inspection.aggregate";
-import { UID } from "../../core-tools/id";
-import { SubscriptionLevel } from "./subscription-level";
-import { InspectionDate } from "./inspection-date.value-object";
-import { InspectionCreatedEvent } from "./domain-events/inspection-created.event";
+import { UID } from "../../../core-tools/id";
+import { SubscriptionLevel } from "../subscription-level";
+import { InspectionDate } from "../inspection-date.value-object";
+import { InspectionCreatedEvent } from "../domain-events/inspection-created.event";
 
 describe("Inspection", () => {
   let inspectionId: UID;

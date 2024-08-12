@@ -1,5 +1,5 @@
 import { UID } from "src/core-tools/id";
-import { Inspection } from "../inspection.aggregate";
+import { Inspection } from "../inspection/inspection.aggregate";
 
 export interface InspectionRepositoryPort {
     save(inspection: Inspection): Promise<void>;

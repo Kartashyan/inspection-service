@@ -1,5 +1,5 @@
 import { DomainEvent } from "src/core-tools/domain-event";
-import { Inspection } from "../inspection.aggregate";
+import { Inspection } from "../inspection/inspection.aggregate";
 
 export class InspectionCreatedEvent extends DomainEvent {
     readonly occuredAt: Date;

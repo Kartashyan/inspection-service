@@ -1,5 +1,5 @@
-import { Inspection } from "./inspection.aggregate";
-import { InspectorRepositoryPort } from "./ports/inspector-repository.port";
+import { Inspection } from "../inspection/inspection.aggregate";
+import { InspectorRepositoryPort } from "../ports/inspector-repository.port";
 
 export class InspectionSchedulingDomainService {
     constructor(private inspectorRepository: InspectorRepositoryPort) {

@@ -1,4 +1,4 @@
-import { Inspection } from "../../domain/inspection.aggregate";
+import { Inspection } from "../../domain/inspection/inspection.aggregate";
 import { ClientsRepositoryPort } from "../../domain/ports/client-repository.port";
 import { InspectionRepositoryPort } from "../../domain/ports/inspection-repository.port";
 import { SubscriptionLevel } from "../../domain/subscription-level";

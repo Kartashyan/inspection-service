@@ -1,4 +1,4 @@
-import { Inspector } from "../inspector.aggregate";
+import { Inspector } from "../inspector/inspector.aggregate";
 import { SubscriptionLevel } from "../subscription-level";
 
 export interface InspectorRepositoryPort {

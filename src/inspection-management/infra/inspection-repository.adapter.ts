@@ -1,5 +1,5 @@
 import { UID } from "src/core-tools/id";
-import { Inspection } from "../domain/inspection.aggregate";
+import { Inspection } from "../domain/inspection/inspection.aggregate";
 import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.port";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 

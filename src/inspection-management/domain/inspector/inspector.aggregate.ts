@@ -1,9 +1,9 @@
-import { UID } from "../../core-tools/id";
-import { SubscriptionLevel } from "./subscription-level";
-import { InspectionDate } from "./inspection-date.value-object";
-import { DomainError } from "../../core-tools/domain-error";
-import { AggregateRoot } from "../../core-tools/aggregate-root";
-import { InspectorBookedEvent } from "./domain-events/inspector-booked.event";
+import { UID } from "../../../core-tools/id";
+import { SubscriptionLevel } from "../subscription-level";
+import { InspectionDate } from "../inspection-date.value-object";
+import { DomainError } from "../../../core-tools/domain-error";
+import { AggregateRoot } from "../../../core-tools/aggregate-root";
+import { InspectorBookedEvent } from "../domain-events/inspector-booked.event";
 
 type ScheduleItem = {
     date: InspectionDate;
