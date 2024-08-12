@@ -1,8 +1,8 @@
 import { UID } from "src/core-tools/id";
-import { InspectionDate } from "../domain/inspection-date.value-object";
-import { Inspection, InspectionProps } from "../domain/inspection.aggregate";
-import { ClientsRepositoryPort } from "../domain/ports/client-repository.port";
-import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.port";
+import { InspectionDate } from "../../domain/inspection-date.value-object";
+import { Inspection, InspectionProps } from "../../domain/inspection.aggregate";
+import { ClientsRepositoryPort } from "../../domain/ports/client-repository.port";
+import { InspectionRepositoryPort } from "../../domain/ports/inspection-repository.port";
 import { RegisterInspectionCommand } from "./register-inspection.command";
 
 interface Dependancies {

@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { RegisterInspectionRequestDto } from './register-inspection-request.dto';
-import { RegisterInspectionCommand } from '../applicaation/register-inspection.command';
+import { RegisterInspectionCommand } from '../applicaation/inspection/register-inspection.command';
 import { CommandBus } from '@nestjs/cqrs';
 
 @Controller('inspection-management')

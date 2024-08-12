@@ -1,6 +1,6 @@
 import { UID } from "src/core-tools/id";
-import { InspectionDate } from "../domain/inspection-date.value-object";
-import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.port";
+import { InspectionDate } from "../../domain/inspection-date.value-object";
+import { InspectionRepositoryPort } from "../../domain/ports/inspection-repository.port";
 
 export class InspectorBookedEventHandler {
     constructor(

@@ -1,11 +1,9 @@
+import { Inspection } from "../../domain/inspection.aggregate";
+import { ClientsRepositoryPort } from "../../domain/ports/client-repository.port";
+import { InspectionRepositoryPort } from "../../domain/ports/inspection-repository.port";
+import { SubscriptionLevel } from "../../domain/subscription-level";
 import { InspectionRequestDto } from "./inspection.dto";
-import { InspectionDate } from "../domain/inspection-date.value-object";
-import { Inspection, InspectionProps } from "../domain/inspection.aggregate";
-import { ClientsRepositoryPort } from "../domain/ports/client-repository.port";
-import { InspectionRepositoryPort } from "../domain/ports/inspection-repository.port";
 import { registerInspectionUseCase } from "./register-inspection.handler.use-case";
-import { SubscriptionLevel } from "../domain/subscription-level";
-import { UID } from "src/core-tools/id";
 
 describe('registerInspectionUsecase', () => {
   let request: InspectionRequestDto;
