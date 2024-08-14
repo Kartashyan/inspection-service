@@ -1,5 +1,5 @@
 import { Module, Provider } from '@nestjs/common';
-import { RegisterInspectionCommandHandler } from './register-inspection.command-handler.service';
+import { RegisterInspectionCommandHandler } from '../applicaation/inspection/register-inspection.command-handler.service';
 import { InspectionManagementController } from './inspection-management.controller';
 import { InspectionInMemoryTestRepositoryAdapter } from './inspection-repository.adapter';
 import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';

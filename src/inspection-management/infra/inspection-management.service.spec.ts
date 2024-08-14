@@ -3,7 +3,7 @@ import { ClientsRepositoryPort } from '../domain/ports/client-repository.port';
 import { InspectionRepositoryPort } from '../domain/ports/inspection-repository.port';
 import { SubscriptionLevel } from '../domain/subscription-level';
 import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
-import { CreateNewInspectionDto, RegisterInspectionCommandHandler } from './register-inspection.command-handler.service';
+import { CreateNewInspectionDto, RegisterInspectionCommandHandler } from '../applicaation/inspection/register-inspection.command-handler.service';
 
 describe('InspectionManagementService', () => {
   let service: RegisterInspectionCommandHandler;
