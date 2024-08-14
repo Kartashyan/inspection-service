@@ -2,11 +2,11 @@ import { Inspection } from "../../domain/inspection/inspection.aggregate";
 import { ClientsRepositoryPort } from "../../domain/ports/client-repository.port";
 import { InspectionRepositoryPort } from "../../domain/ports/inspection-repository.port";
 import { SubscriptionLevel } from "../../domain/subscription-level";
-import { InspectionRequestDto } from "./inspection.dto";
+import { RegisterInspectionCommand } from "./register-inspection.command";
 import { registerInspectionUseCase } from "./register-inspection.handler.use-case";
 
 describe('registerInspectionUsecase', () => {
-  let request: InspectionRequestDto;
+  let command: RegisterInspectionCommand;
   let clientsRepository: ClientsRepositoryPort;
   let inspectionsRepository: InspectionRepositoryPort;
   let saveInspectionSpy = jest.fn();
@@ -14,7 +14,7 @@ describe('registerInspectionUsecase', () => {
   let createInspectionSideEffectSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    request = {
+    command = {
       clientId: 'clientId',
       siteId: 'siteId',
     };
@@ -38,7 +38,7 @@ describe('registerInspectionUsecase', () => {
       getSubscriptionLevel: jest.fn().mockReturnValue(SubscriptionLevel.Essential),
     });
 
-    await registerInspectionUseCase(request, { clientsRepository, inspectionsRepository });
+    await registerInspectionUseCase(command, { clientsRepository, inspectionsRepository });
     expect(clientsRepository.findById).toHaveBeenCalled();
   });
 
@@ -58,7 +58,7 @@ describe('registerInspectionUsecase', () => {
     findClientByIdSpy.mockResolvedValue(client);
     saveInspectionSpy.mockResolvedValue(inspection);
 
-    await registerInspectionUseCase(request, { clientsRepository, inspectionsRepository });
+    await registerInspectionUseCase(command, { clientsRepository, inspectionsRepository });
     expect(inspectionsRepository.save).toHaveBeenCalledWith(inspection);
   });
 });
