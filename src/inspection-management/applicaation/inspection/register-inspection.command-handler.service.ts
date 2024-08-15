@@ -7,6 +7,8 @@ import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from '../../infra/inspection
 import { UID } from 'src/core-tools/id';
 import { Inspection, InspectionProps } from 'src/inspection-management/domain/inspection/inspection.aggregate';
 import { InspectionDate } from 'src/inspection-management/domain/inspection-date.value-object';
+import { Client } from 'src/inspection-management/domain/client.aggregate';
+import { ClientNotFoundError } from '../client-not-found.error';
 
 export type CreateNewInspectionDto = {
     clientId: string;
@@ -21,6 +23,9 @@ export class RegisterInspectionCommandHandler {
     ) { }
     async execute(command: RegisterInspectionCommand) {
         const client = await this.clientRepository.findById(command.clientId);
+        if (!client) {
+            throw new ClientNotFoundError(command.clientId);
+        }
         const inspectionProps: InspectionProps<false> = {
             id: new UID(),
             inspectorId: null,
