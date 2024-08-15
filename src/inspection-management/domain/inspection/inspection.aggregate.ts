@@ -38,7 +38,7 @@ export class Inspection extends AggregateRoot<InspectionProps<boolean>> {
     static create(props: InspectionProps<boolean>): Inspection {
         const inspection = new Inspection(props);
         if(props.id.isNew) {
-            inspection.addDomainEvent(new InspectionCreatedEvent(inspection));
+            inspection.addDomainEvent(new InspectionCreatedEvent({aggregateId: inspection.id}));
         }
         return inspection;
     }
