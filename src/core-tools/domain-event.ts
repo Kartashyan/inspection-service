@@ -1,16 +1,13 @@
 import { UID } from "./id";
 
-type EventProps = {
+export type DomainEventProps = {
     aggregateId: UID;
 }
 
 export abstract class DomainEvent {
     readonly occuredAt: Date;
-    readonly name: string;
-    readonly aggregateId: UID;
 
-    constructor(readonly props: EventProps) {
+    constructor(readonly props: DomainEventProps) {
         this.occuredAt = new Date();
-        this.aggregateId = props.aggregateId;
     }
 }
