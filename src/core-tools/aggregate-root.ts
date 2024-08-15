@@ -27,7 +27,7 @@ export class AggregateRoot<T extends { id: UID }> extends Entity<T> {
     ): Promise<void> {
         await Promise.all(
             this.getDomainEvents().map(async (event) => {
-                return eventEmitter.emitAsync(event.name, event);
+                return eventEmitter.emitAsync(event.constructor.name, event);
             }),
         );
         this.clearEvents();
