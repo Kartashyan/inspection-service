@@ -3,6 +3,7 @@ import { ClientsRepositoryPort } from '../../domain/ports/client-repository.port
 import { InspectionRepositoryPort } from '../../domain/ports/inspection-repository.port';
 import { Inspection } from '../../domain/inspection/inspection.aggregate';
 import { SubscriptionLevel } from '../../domain/subscription-level'
+import { ClientNotFoundError } from '../client-not-found.error';
 
 describe('RegisterInspectionCommandHandler', () => {
   let handler: RegisterInspectionCommandHandler;
@@ -26,6 +27,12 @@ describe('RegisterInspectionCommandHandler', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('should throw an error if the client does not exist', async () => {
+    findClientByIdSpy.mockResolvedValue(null);
+
+    await expect(handler.execute({ clientId: 'clientId', siteId: 'siteId' })).rejects.toThrow(ClientNotFoundError);
   });
 
   it('should create an unscheduled inspection with the correct properties', async () => {
