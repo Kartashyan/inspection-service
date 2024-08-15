@@ -13,7 +13,7 @@ export type CreateNewInspectionDto = {
 };
 
 @CommandHandler(BookInspectorForInspectionCommand)
-export class RegisterInspectionCommandHandler {
+export class BookInspectorCommandHandler {
     constructor(
         @Inject(INSPECTOR_REPOSITORY) private readonly inspectorRepository: InspectorRepositoryPort,
         @Inject(INSPECTION_REPOSITORY) private readonly inspectionRepository: InspectionRepositoryPort,
