@@ -5,7 +5,7 @@ import { InspectionInMemoryTestRepositoryAdapter } from './inspection-repository
 import { CLIENT_REPOSITORY, INSPECTION_REPOSITORY } from './inspection-management.di-tokens';
 import { ClientInMemoryTestRepositoryAdapter } from './client-repository.adapter';
 import { CqrsModule } from '@nestjs/cqrs';
-import { InspectionScheduler } from '../applicaation/schedule-inspection-when-new-inspection-created/inspection-scheduler.domain-event-handler';
+import { InspectionScheduler } from '../applicaation/inspection-scheduler.event-handler/inspection-scheduler.domain-event-handler';
 
 const repositories: Provider[] = [
   {
